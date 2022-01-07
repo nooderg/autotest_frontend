@@ -1,1 +1,17 @@
 .HomePage {}
+
+.dropzone {
+    border: 2px dashed #fff;
+    border-radius: 5px;
+    padding: 80px;
+    margin: 20px 0;
+    text-align: center;
+    cursor: pointer;
+}
+
+.fileCard {
+    text-align: left;
+    margin: 20px;
+    white-space: pre-line;
+    font-size: 14px;
+}
