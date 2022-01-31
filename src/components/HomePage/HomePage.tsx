@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import styles from './HomePage.module.css';
 import {useDropzone} from 'react-dropzone';
-import { Button, Card, CardContent } from '@mui/material';
+import { Button, Card, CardContent, Container } from '@mui/material';
 import axios from 'axios';
 
 interface IDropzoneProps {
@@ -62,7 +62,7 @@ function HomePage() {
   }
 
   return (
-    <div className={styles.HomePage}>
+    <Container className={styles.HomePage}>
       {generate ?
         <div>
           <Card className={styles.fileCard}>
@@ -78,7 +78,7 @@ function HomePage() {
           {files.length > 0 && <Button variant='outlined' onClick={handleGenerate}>Generate tavern file</Button>}
         </div>
       }
-    </div>
+    </Container>
   );
 }
 
