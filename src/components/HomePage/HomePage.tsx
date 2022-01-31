@@ -2,7 +2,12 @@ import React, { useCallback, useState } from 'react';
 import styles from './HomePage.module.css';
 import {useDropzone} from 'react-dropzone';
 import { Button, Card, CardContent, Container } from '@mui/material';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import DownloadIcon from '@mui/icons-material/Download';
+import Tooltip from '@mui/material/Tooltip';
+import ClickAwayListener from '@mui/material/ClickAwayListener';
 import axios from 'axios';
+
 
 interface IDropzoneProps {
   files: Array<File>;
@@ -47,6 +52,8 @@ function HomePage() {
   const [files, setFiles] = useState<Array<File>>([])
   const [generate, setGenerate] = useState<boolean>(false)
   const [generatedFile, setGeneratedFile] = useState<string>("")
+
+  const [isCopied,setIsCopied] = useState<boolean>(false)
   
   function handleBack() {
     setGenerate(false)
@@ -61,10 +68,60 @@ function HomePage() {
     })
   }
 
+  function download(){
+    const pom = document.createElement('a');
+    pom.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(generatedFile));
+    pom.setAttribute('download','taver.json');
+    pom.click()
+
+    console.log('is Download!')
+  }
+
+  const copyToClipboard = async () => {
+    await navigator.clipboard.writeText(generatedFile);
+    setIsCopied(true)
+    console.log('is Copied !')
+  }
+
+  const handleTooltipClose = () => {
+    setIsCopied(false)
+  } 
+
+
+
   return (
     <Container className={styles.HomePage}>
       {generate ?
         <div>
+          <div className={styles.download_zone}>
+          <Button 
+          variant="contained"
+          onClick={()=>{download()}}
+          endIcon={<DownloadIcon />}
+          >Download</Button>
+          <ClickAwayListener onClickAway={handleTooltipClose}>
+            <div>
+              <Tooltip
+                PopperProps={{
+                  disablePortal: true,
+                }}
+                onClose={handleTooltipClose}
+                open={isCopied}
+                disableFocusListener
+                disableHoverListener
+                disableTouchListener
+                title="is Copied !  "
+              >
+                <Button 
+                  variant="contained"
+                  onClick={()=>{copyToClipboard()}}
+                  endIcon={<ContentCopyIcon />}
+                  >Copy</Button>
+              </Tooltip>
+            </div>
+          </ClickAwayListener>
+          </div>
+
           <Card className={styles.fileCard}>
             <CardContent>
               {generatedFile}
