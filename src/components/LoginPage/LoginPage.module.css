@@ -1,1 +1,8 @@
-.LoginPage {}
+.LoginCard {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    margin-top: 20px !important;
+}
