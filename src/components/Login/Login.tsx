@@ -4,9 +4,15 @@ import axios from 'axios';
 import { Button } from '@mui/material';
 
 
+export interface LoginResponse {
+  error: boolean;
+  message: string;
+}
+
 interface LoginProps {
   username:string;
   password: string;
+  setLoginResponse: (loginResponse: LoginResponse) => void;
 }
 
 interface User {
@@ -42,6 +48,7 @@ function getAccounts(): Array<User> {
   xhr.open('GET','http://'+window.location.host+'/mock/account-mock.json', false);
   xhr.send();
   const response = xhr.responseText;
+  console.log(response);
   const accounts: Array<User> = JSON.parse(response);
   console.log(accounts);
   return accounts;
@@ -55,7 +62,7 @@ function verifyPassword(user: User, password: string): boolean {
   return user.password === password;
 }
 
-const Login: FC<LoginProps> = ({username, password}) => (
+const Login: FC<LoginProps> = ({username, password, setLoginResponse}) => (
 <Button
   variant="contained"
   onClick={() => {
@@ -63,9 +70,14 @@ const Login: FC<LoginProps> = ({username, password}) => (
       const user: User|undefined = login(username, password);
       if (user) {
         console.log(user);
+        setLoginResponse({error: false, message: 'Login success'});
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
+      setLoginResponse({
+        error: true,
+        message: error?.message,
+      });
     }
   }}
 >
