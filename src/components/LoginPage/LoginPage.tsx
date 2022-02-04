@@ -20,7 +20,7 @@ const LoginPage = () => (
           <Input id="username" margin="dense" />
         </FormControl>
         <FormControl className={styles.input}>
-          <InputLabel htmlFor="password">Password</InputLabel>
+          <InputLabel htmlFor="password">Password </InputLabel>
           <Input id="password" type="password" margin="dense" />
         </FormControl>
         <FormControl className={styles.input}>
