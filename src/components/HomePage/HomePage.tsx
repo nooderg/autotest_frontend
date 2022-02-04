@@ -1,7 +1,8 @@
 import React, { useCallback, useState } from 'react';
 import styles from './HomePage.module.css';
 import {useDropzone} from 'react-dropzone';
-import { Button, Card, CardContent, Container } from '@mui/material';
+import { Button, Card, CardContent, Container, List, ListItem, ListItemIcon, Typography } from '@mui/material';
+import FileIcon from '@mui/icons-material/InsertDriveFile';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DownloadIcon from '@mui/icons-material/Download';
 import Tooltip from '@mui/material/Tooltip';
@@ -14,9 +15,18 @@ interface IDropzoneProps {
   setFiles: (files: File[] | ((prevVar: File[]) => File[])) => void;
 }
 
+function getSizeText(size: number) {
+  if (size < 1024) {
+    return `${size} bytes`;
+  } else if (size < 1024 * 1024) {
+    return `${(size / 1024).toFixed(1)} KB`;
+  } else {
+    return `${(size / 1024 / 1024).toFixed(1)} MB`;
+  }
+}
+
 function Dropzone({files, setFiles}: IDropzoneProps) {
   
-
   const onDrop = useCallback(acceptedFiles => {
     console.log(acceptedFiles);
     acceptedFiles.forEach((file: File) => {
@@ -36,13 +46,17 @@ function Dropzone({files, setFiles}: IDropzoneProps) {
       {
         files.length == 0 ?
         <p>Drag n drop some files here, or click to select files</p> :
-        <ul>
+        <List disablePadding>
           {files.map(file => (
-            <li key={file.name}>
-              {file.name} - {file.size} bytes
-            </li>
+            <ListItem key={file.name}>
+              <ListItemIcon>
+                <FileIcon />
+              </ListItemIcon>
+              <Typography>{file.name}</Typography>
+              <Typography sx={{fontSize: 12, color: 'gray', marginLeft: 1}}>{getSizeText(file.size)}</Typography>
+            </ListItem>
           ))}
-        </ul>
+        </List>
       }
     </div>
   )
@@ -86,8 +100,6 @@ function HomePage() {
   const handleTooltipClose = () => {
     setIsCopied(false)
   } 
-
-
 
   return (
     <Container className={styles.HomePage}>
