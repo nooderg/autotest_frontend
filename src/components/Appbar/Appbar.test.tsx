@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Appbar from './Appbar';
+import {Appbar} from './Appbar';
 
 it('It should mount', () => {
   const div = document.createElement('div');
