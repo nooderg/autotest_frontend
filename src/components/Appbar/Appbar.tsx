@@ -17,7 +17,7 @@ const pages = [
 
 const linkStyle = {color: "#fff", marginLeft: 8, textDecoration:'none',fontWeight:'600'}
 
-const Appbar = () => {
+export const Appbar = () => {
   return (
     <AppBar position="static" sx={{marginBottom: 2}}>
       <Container maxWidth="xl">
@@ -48,4 +48,3 @@ const Appbar = () => {
     </AppBar>
   );
 };
-export default Appbar;

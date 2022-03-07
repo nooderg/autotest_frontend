@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styles from "./LoginPage.module.css";
 import {
   Alert,
-  Button,
   Card,
   CardContent,
   Container,
@@ -11,9 +10,10 @@ import {
   InputLabel,
   Snackbar,
 } from "@mui/material";
-import Login, { LoginResponse } from "../Login/Login";
 
-function LoginPage() {
+import { Login, LoginResponse } from "../../components";
+
+export function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginResponse, setLoginResponse] = useState<LoginResponse>();
@@ -76,5 +76,3 @@ function LoginPage() {
     </Container>
   );
 }
-
-export default LoginPage;

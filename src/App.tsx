@@ -1,13 +1,9 @@
 import React from 'react';
-import { Routes, Route, Link } from "react-router-dom";
-
-import LoginPage from './components/LoginPage/LoginPage';
-import RegisterPage from './components/RegisterPage/RegisterPage';
-import HomePage from './components/HomePage/HomePage';
+import { Routes, Route } from "react-router-dom";
 
 import './App.css';
-import Appbar from './components/Appbar/Appbar';
-import LandingPage from './components/LandingPage/LandingPage';
+import {Appbar} from './components';
+import { HomePage, LandingPage, LoginPage, RegisterPage } from './pages';
 
 function App() {
   return (

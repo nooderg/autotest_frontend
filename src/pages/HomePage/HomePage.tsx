@@ -62,7 +62,7 @@ function Dropzone({files, setFiles}: IDropzoneProps) {
   )
 }
 
-function HomePage() {
+export function HomePage() {
   const [files, setFiles] = useState<Array<File>>([])
   const [generate, setGenerate] = useState<boolean>(false)
   const [generatedFile, setGeneratedFile] = useState<string>("")
@@ -150,5 +150,3 @@ function HomePage() {
     </Container>
   );
 }
-
-export default HomePage;
