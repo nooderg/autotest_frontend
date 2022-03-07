@@ -11,18 +11,32 @@ import {
   Snackbar,
 } from "@mui/material";
 
-import { Login, LoginResponse } from "../../components";
+import { Login, ILoginResponse } from "../../components";
+import Api from "../../helper/api";
+import { ILoginForm } from "../../types/formTypes";
 
 export function LoginPage() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [loginResponse, setLoginResponse] = useState<LoginResponse>();
+  const api = new Api();
+
+  const [loginForm, setLoginForm] = useState<ILoginForm>({
+    email: "",
+    password: "",
+  });
+
+  const [loginResponse, setLoginResponse] = useState<ILoginResponse>({
+    open: false,
+    error: false,
+    message: "",
+  });
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (loginResponse) {
-      setOpen(true);
-    }
+      if (loginResponse.open) {
+        setOpen(true);
+        /*api.login(loginForm).then((response: any) => {
+          console.log(response);
+        });*/
+      }
   }, [loginResponse]);
 
   return (
@@ -33,12 +47,14 @@ export function LoginPage() {
         <CardContent className={styles.LoginCard}>
           <h2>Login</h2>
           <FormControl className={styles.input}>
-            <InputLabel htmlFor="username">Username</InputLabel>
+            <InputLabel htmlFor="username">Email</InputLabel>
             <Input
-              id="username"
+              id="email"
               margin="dense"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={loginForm.email}
+              onChange={(e) => {
+                setLoginForm({ ...loginForm, email: e.target.value });
+              }}
             />
           </FormControl>
           <FormControl className={styles.input}>
@@ -47,14 +63,15 @@ export function LoginPage() {
               id="password"
               type="password"
               margin="dense"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={loginForm.password}
+              onChange={(e) => {
+                setLoginForm({ ...loginForm, password: e.target.value });
+              }}
             />
           </FormControl>
           <FormControl className={styles.input}>
             <Login
-              username={username}
-              password={password}
+              form={loginForm}
               setLoginResponse={setLoginResponse}
             />
           </FormControl>
