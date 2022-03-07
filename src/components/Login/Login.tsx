@@ -14,10 +14,19 @@ interface LoginProps {
   setLoginResponse: (loginResponse: ILoginResponse) => void;
 }
 
+const isEmail = (email: string): boolean => {
+  const regex = new RegExp(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/);
+  return regex.test(email);
+}
+
 function login(form: ILoginForm): void {
   //TODO: search account in database
   if (form.email !== "test") {
      throw new Error('No accounts found');
+  }
+
+  if(isEmail(form.email)){
+    throw new Error('Is not email');
   }
   //TODO: check password in database
   if (form.password !== "test") {

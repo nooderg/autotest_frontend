@@ -15,6 +15,11 @@ import { Login, ILoginResponse } from "../../components";
 import Api from "../../helper/api";
 import { ILoginForm } from "../../types/formTypes";
 
+const isEmail = (email: string): boolean => {
+  const regex = new RegExp(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/);
+  return regex.test(email);
+}
+
 export function LoginPage() {
   const api = new Api();
 
@@ -59,6 +64,9 @@ export function LoginPage() {
                 setLoginForm({ ...loginForm, email: e.target.value });
               }}
             />
+            {loginForm && loginForm.email && !isEmail(loginForm.email) && <>
+              <span className="error">Is not mail</span>
+            </>}
           </FormControl>
           <FormControl className={styles.input}>
             <InputLabel htmlFor="password">Password</InputLabel>

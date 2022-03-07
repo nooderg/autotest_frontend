@@ -14,7 +14,7 @@ import {
 import Api from "../../helper/api";
 import { IRegisterForm } from "../../types/formTypes";
 
-function isEmail(email: string): boolean {
+ const isEmail = (email: string): boolean => {
   const regex = new RegExp(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/);
   return regex.test(email);
 }
@@ -35,27 +35,37 @@ export const RegisterPage = () => {
   const [successRegister, setSuccessRegister] = useState<boolean>(false);
 
   function register(): any {
+
+
     if (
       registerForm.firstName &&
       registerForm.lastName &&
-      registerForm.email &&
+      isEmail(registerForm.email) &&
       registerForm.password &&
       registerForm.confirmPassword &&
       registerForm.password == registerForm.confirmPassword
     ) {
+      console.log(registerForm)
       setregisteriserror(false);
       setSuccessRegister(true);
-    } else {
+
+
+      // TO DO : Send the object to api
+
+
+
+
+    } else {    
       setregisteriserror(true);
       setSuccessRegister(false);
+      throw new Error('Form is not completed');
     }
+
+
+
   }
 
-  useEffect(() => {
-    if (successRegister) {
-      console.log("success");
-    }
-  }, [successRegister]);
+  
 
   return (
     <Container
@@ -102,9 +112,10 @@ export const RegisterPage = () => {
                 setRegisterForm({ ...registerForm, email: e.target.value });
               }}
             />
+
             {registeriserror && registerForm.email.length > 0 && !isEmail(registerForm.email)
-              ? "Ceci n'est pas un mail"
-              : ""}
+              && <>
+              <span className="error">Is not a mail !</span></>}
           </FormControl>
 
           <FormControl className={styles.input}>
@@ -133,7 +144,7 @@ export const RegisterPage = () => {
           </FormControl>
 
           {registeriserror && registerForm.password !== registerForm.confirmPassword
-            ? "Mot de passe différents"
+            ? `<span class="error">"Mot de passe différents</span>`
             : ""}
 
           <FormControl className={styles.input}>
@@ -151,3 +162,4 @@ export const RegisterPage = () => {
     </Container>
   );
 };
+
