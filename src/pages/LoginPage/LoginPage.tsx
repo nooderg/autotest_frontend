@@ -33,9 +33,12 @@ export function LoginPage() {
   useEffect(() => {
       if (loginResponse.open) {
         setOpen(true);
-        /*api.login(loginForm).then((response: any) => {
-          console.log(response);
-        });*/
+
+        if (!loginResponse.error) {
+          api.login(loginForm).then((response: any) => {
+            console.log(response);
+          });
+        }
       }
   }, [loginResponse]);
 
