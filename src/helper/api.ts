@@ -21,10 +21,18 @@ export default class Api {
   }
 
   register = (data: IRegisterForm) => {
-    return this.client.post("/register", data);
+    return this.client.post("/register", {
+      'first_name': data.firstName,
+      'last_name': data.lastName,
+      'email': data.email,
+      'password': data.password,
+    });
   };
 
   login = (data: ILoginForm) => {
-    return this.client.post("/login", data);
+    return this.client.post("/login", {
+      'email': data.email,
+      'password': data.password,
+    });
   };
 }
