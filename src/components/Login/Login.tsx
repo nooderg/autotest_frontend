@@ -62,7 +62,7 @@ function verifyPassword(user: User, password: string): boolean {
   return user.password === password;
 }
 
-const Login: FC<LoginProps> = ({username, password, setLoginResponse}) => (
+export const Login: FC<LoginProps> = ({username, password, setLoginResponse}) => (
 <Button
   variant="contained"
   onClick={() => {
@@ -84,5 +84,3 @@ const Login: FC<LoginProps> = ({username, password, setLoginResponse}) => (
   Login
 </Button>
 );
-
-export default Login;

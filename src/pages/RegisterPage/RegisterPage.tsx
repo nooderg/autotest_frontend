@@ -17,7 +17,7 @@ function isEmail(email:string):boolean{
   return regex.test(email)
 }
 
-const RegisterPage = () => {
+export const RegisterPage = () => {
 
   const [firstname,setfirstname] = useState<string>('')
   const [lastname,setlastname] = useState<string>('')
@@ -87,5 +87,3 @@ return (
     </Card>
   </Container>
 )};
-
-export default RegisterPage;
