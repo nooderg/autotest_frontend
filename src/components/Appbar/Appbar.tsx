@@ -15,11 +15,12 @@ export const Appbar = () => {
 
   const pages = [
     {name: 'HOME', path: '/'},
-    {name: 'APP', path: '/app'},
   ];
 
   if (jwt === "") {
     pages.push({name: 'REGISTER', path: '/register'});
+  } else {
+    pages.push({name: 'APP', path: '/app'});
   }
 
   return (

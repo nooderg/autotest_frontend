@@ -12,7 +12,7 @@ interface AppContextInterface {
 }
 
 const defaultContextApp: AppContextInterface = {
-  jwt: localStorage.jwt,
+  jwt: localStorage.jwt ?? "",
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setJwt: function (_jwt: string): void {
     throw new Error('Function not implemented.');
