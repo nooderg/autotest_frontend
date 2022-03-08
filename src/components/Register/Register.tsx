@@ -14,11 +14,10 @@ import { IRegisterForm } from "../../types/formTypes";
 import RegisterButton from "../RegisterButton/RegisterButton";
 import { isEmail } from "../../helper/formValidation";
 
-
 export const Register = () => {
   const api = new Api();
 
-  const [registerResponse,setRegisterResponse] = useState<boolean>(false)
+  const [registerResponse, setRegisterResponse] = useState<boolean>(false);
   const [registerForm, setRegisterForm] = useState<IRegisterForm>({
     firstName: "",
     lastName: "",
@@ -27,7 +26,6 @@ export const Register = () => {
     confirmPassword: "",
   });
 
-  
   return (
     <div className={styles.Register}>
       <FormControl className={styles.input}>
@@ -40,9 +38,7 @@ export const Register = () => {
           }}
         />
       </FormControl>
-      {registerForm.firstName.length == 0
-        ? "Veuillez remplir ce champs"
-        : ""}
+      {registerForm.firstName.length == 0 && <span>Please fill in this field</span>}
 
       <FormControl className={styles.input}>
         <InputLabel htmlFor="username">Last name</InputLabel>
@@ -54,9 +50,7 @@ export const Register = () => {
           }}
         />
       </FormControl>
-      {registerForm.lastName.length == 0
-        ? "Veuillez remplir ce champs"
-        : ""}
+      {registerForm.firstName.length == 0 && <span>Please fill in this field</span>}
 
       <FormControl className={styles.input}>
         <InputLabel htmlFor="username">E-mail</InputLabel>
@@ -68,11 +62,9 @@ export const Register = () => {
             setRegisterForm({ ...registerForm, email: e.target.value });
           }}
         />
-        {
-        registerForm.email.length > 0 &&
-        !isEmail(registerForm.email)
-          ? "Ceci n'est pas un mail"
-          : ""}
+        {registerForm.email.length > 0 && !isEmail(registerForm.email) && (
+          <span>This is not an email</span>
+        )}
       </FormControl>
 
       <FormControl className={styles.input}>
@@ -106,8 +98,7 @@ export const Register = () => {
         : ""}
 
       <FormControl className={styles.input}>
-
-        <RegisterButton form={registerForm}  setResponse={setRegisterResponse} />
+        <RegisterButton form={registerForm} setResponse={setRegisterResponse} />
         {registerResponse && "Votre compte est bien enregistré !"}
       </FormControl>
     </div>

@@ -44,7 +44,7 @@ const RegisterButton: FC<RegisterButtonProps> = ({ form, setResponse }) => {
     className={styles.button}
     variant="contained"
     onClick={register}
-    disabled={registeriserror}
+    disabled={registeriserror ?? false}
   >
     Register
   </Button>

@@ -1,1 +1,6 @@
 .Register {}
+
+.input {
+    margin-top: 20px !important;
+    display: flex !important;
+}
