@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 import React from "react";
-import styles from "./LandingPage.module.css";
+import styles from "./NotConnected.module.css";
 import {Container} from "@mui/material";
 import web_hosting from "./web_hosting.svg";
 
