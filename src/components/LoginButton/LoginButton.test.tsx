@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { LoginButton } from '..';
+import {LoginButton} from './LoginButton';
 
 
 it('It should mount', () => {
