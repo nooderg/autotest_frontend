@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styles from "./RegisterPage.module.css";
 
 import {
@@ -50,12 +50,6 @@ export const RegisterPage = () => {
       setSuccessRegister(false);
     }
   }
-
-  useEffect(() => {
-    if (successRegister) {
-      console.log("success");
-    }
-  }, [successRegister]);
 
   return (
     <Container

@@ -1,25 +1,10 @@
-import React, { createContext, FC, useContext, useEffect, useState } from 'react';
+import React, { createContext, FC, useContext, useState } from 'react';
 import { Routes, Route, Outlet, Navigate } from "react-router-dom";
 
 import './App.css';
 import { Appbar } from './components';
 import { HomePage, LandingPage, LoginPage, RegisterPage } from './pages';
 import { NotConnectedPage } from './pages/NotConnectedPage/NotConnectedPage';
-
-// Listen on a specific host via the HOST environment variable
-const host:string = process.env.HOST || '0.0.0.0';
-// Listen on a specific port via the PORT environment variable
-const port:number = Number(process.env.PORT) || 8080;
-
-// cors_proxy.createServer({
-//     originWhitelist: [], // Allow all origins
-//     requireHeader: ['origin', 'x-requested-with'],
-//     removeHeaders: ['cookie', 'cookie2']
-// }).listen(port, host, function() {
-//     console.log('Running CORS Anywhere on ' + host + ':' + port);
-// });
-
-//export const auth = localStorage.jwt !== undefined && localStorage.jwt !== "";
 
 interface AppContextInterface {
   jwt: string;
@@ -50,8 +35,11 @@ function Logout() {
 function App() {
   const [jwtState, setJwtState] = useState(defaultContextApp.jwt);
   const setJwt = (jwt: string) => {
-    console.log("setJwt", jwt);
-    localStorage.setItem('jwt', jwt);
+    if (jwt === "") {
+      localStorage.removeItem("jwt");
+    } else {
+      localStorage.setItem("jwt", jwt);
+    }
     setJwtState(jwt);
   }
 

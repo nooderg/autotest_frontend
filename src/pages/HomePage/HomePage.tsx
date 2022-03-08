@@ -28,7 +28,6 @@ function getSizeText(size: number) {
 function Dropzone({files, setFiles}: IDropzoneProps) {
   
   const onDrop = useCallback(acceptedFiles => {
-    console.log(acceptedFiles);
     acceptedFiles.forEach((file: File) => {
       if (file.type === 'application/json') {
         setFiles(files => [...files, file]);
@@ -77,7 +76,6 @@ export function HomePage() {
   function handleGenerate() {
     setGenerate(true)
     axios.get('/mock/test.tavern.yaml').then(res => {
-      console.log(res.data)
       setGeneratedFile(res.data)
     })
   }
@@ -87,14 +85,11 @@ export function HomePage() {
     pom.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(generatedFile));
     pom.setAttribute('download','taver.json');
     pom.click()
-
-    console.log('is Download!')
   }
 
   const copyToClipboard = async () => {
     await navigator.clipboard.writeText(generatedFile);
     setIsCopied(true)
-    console.log('is Copied !')
   }
 
   const handleTooltipClose = () => {

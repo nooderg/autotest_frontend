@@ -8,16 +8,19 @@ import Container from '@mui/material/Container';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../../App';
 
-const pages = [
-  {name: 'HOME', path: '/'},
-  {name: 'APP', path: '/app'},
-  {name: 'REGISTER', path: '/register'},
-];
-
 const linkStyle = {color: "#fff", marginLeft: 8, textDecoration:'none',fontWeight:'600'}
 
 export const Appbar = () => {
   const { jwt } = useContext(AppContext);
+
+  const pages = [
+    {name: 'HOME', path: '/'},
+    {name: 'APP', path: '/app'},
+  ];
+
+  if (jwt === "") {
+    pages.push({name: 'REGISTER', path: '/register'});
+  }
 
   return (
     <AppBar position="static" sx={{marginBottom: 2}}>

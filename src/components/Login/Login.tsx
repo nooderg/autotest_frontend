@@ -22,8 +22,6 @@ export const Login: FC<LoginProps> = ({ form, setResponse }) => {
         const userService = new UserService();
 
         userService.login(form).then((jwt: AxiosResponse<string, Error>) => {
-
-          console.log(jwt.data);
           sessionStorage.setItem('jwt', jwt.data);
 
           setResponse({

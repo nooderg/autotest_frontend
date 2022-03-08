@@ -40,7 +40,6 @@ export default class Api {
   }
 
   post = (url: string, data: any) => {
-    console.log(data);
     return this.client.post(url, data);
   }
 

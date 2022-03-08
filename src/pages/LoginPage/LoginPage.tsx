@@ -38,12 +38,6 @@ export function LoginPage() {
   useEffect(() => {
     if (loginResponse.open) {
       setOpen(true);
-
-      if (!loginResponse.error) {
-        userService.login(loginForm).then((user) => {
-          console.log(user);
-        });
-      }
     }
   }, [loginResponse]);
 
