@@ -11,24 +11,24 @@ import {
   Snackbar,
 } from "@mui/material";
 
-import { Login, ILoginResponse } from "../../components";
-import Api from "../../helper/api";
-import { ILoginForm } from "../../types/formTypes";
+import { Login } from "../../components";
+import { ILoginForm, IResponseForm } from "../../types/formTypes";
+import UserService from "../../services/userService";
 
 const isEmail = (email: string): boolean => {
   const regex = new RegExp(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/);
   return regex.test(email);
-}
+};
 
 export function LoginPage() {
-  const api = new Api();
+  const userService = new UserService();
 
   const [loginForm, setLoginForm] = useState<ILoginForm>({
     email: "",
     password: "",
   });
 
-  const [loginResponse, setLoginResponse] = useState<ILoginResponse>({
+  const [loginResponse, setLoginResponse] = useState<IResponseForm>({
     open: false,
     error: false,
     message: "",
@@ -36,15 +36,15 @@ export function LoginPage() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-      if (loginResponse.open) {
-        setOpen(true);
+    if (loginResponse.open) {
+      setOpen(true);
 
-        if (!loginResponse.error) {
-          api.login(loginForm).then((response: any) => {
-            console.log(response);
-          });
-        }
+      if (!loginResponse.error) {
+        userService.login(loginForm).then((user) => {
+          console.log(user);
+        });
       }
+    }
   }, [loginResponse]);
 
   return (
@@ -64,9 +64,11 @@ export function LoginPage() {
                 setLoginForm({ ...loginForm, email: e.target.value });
               }}
             />
-            {loginForm && loginForm.email && !isEmail(loginForm.email) && <>
-              <span className="error">Is not mail</span>
-            </>}
+            {loginForm && loginForm.email && !isEmail(loginForm.email) && (
+              <>
+                <span className="error">Is not mail</span>
+              </>
+            )}
           </FormControl>
           <FormControl className={styles.input}>
             <InputLabel htmlFor="password">Password</InputLabel>
@@ -81,24 +83,24 @@ export function LoginPage() {
             />
           </FormControl>
           <FormControl className={styles.input}>
-            <Login
-              form={loginForm}
-              setLoginResponse={setLoginResponse}
-            />
+            <Login form={loginForm} setResponse={setLoginResponse} />
           </FormControl>
-        <Snackbar
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "center",
-          }}
-          autoHideDuration={2000}
-          open={open}
-          onClose={() => setOpen(false)}
-        >
-          <Alert sx={{width: "100%"}} severity={loginResponse?.error ? "error" : "success"}>
-            {loginResponse && loginResponse.message}
-          </Alert>
-        </Snackbar>
+          <Snackbar
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "center",
+            }}
+            autoHideDuration={2000}
+            open={open}
+            onClose={() => setOpen(false)}
+          >
+            <Alert
+              sx={{ width: "100%" }}
+              severity={loginResponse?.error ? "error" : "success"}
+            >
+              {loginResponse && loginResponse.message}
+            </Alert>
+          </Snackbar>
         </CardContent>
       </Card>
     </Container>
