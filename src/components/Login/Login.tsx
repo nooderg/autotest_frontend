@@ -14,6 +14,7 @@ import {
 import { ILoginForm, IResponseForm } from "../../types/formTypes";
 import UserService from "../../services/userService";
 import { LoginButton } from "..";
+import { isEmail } from "../../helper/formValidation";
 
 
 
@@ -55,6 +56,7 @@ export const Login: FC = () => {
             />
             {loginForm && loginForm.email && !isEmail(loginForm.email) && (
               <>
+              
                 <span className="error">Is not mail</span>
               </>
             )}

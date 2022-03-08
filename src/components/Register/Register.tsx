@@ -12,12 +12,8 @@ import {
 import Api from "../../helper/api";
 import { IRegisterForm } from "../../types/formTypes";
 import RegisterButton from "../RegisterButton/RegisterButton";
+import { isEmail } from "../../helper/formValidation";
 
-
-function isEmail(email: string): boolean {
-  const regex = new RegExp(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/);
-  return regex.test(email);
-}
 
 export const Register = () => {
   const api = new Api();
