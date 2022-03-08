@@ -41,6 +41,9 @@ build/Release
 node_modules/
 jspm_packages/
 
+# package.json-based npm client extensions
+.package-lock
+
 # TypeScript v1 declaration files
 typings/
 
