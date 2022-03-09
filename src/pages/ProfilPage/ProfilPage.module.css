@@ -1,0 +1,13 @@
+.ProfilPage {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    margin-top: 20px !important;
+    color: tomato;
+}
+
+.input #text {
+    margin-top: 10px !important;
+}

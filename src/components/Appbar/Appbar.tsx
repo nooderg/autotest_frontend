@@ -7,8 +7,10 @@ import Container from '@mui/material/Container';
 
 import { Link } from 'react-router-dom';
 import { AppContext } from '../../App';
+import {ProfilIconMenu} from '../.';
+import LogoutIcon from '@mui/icons-material/Logout';
 
-const linkStyle = {color: "#fff", marginLeft: 8, textDecoration:'none',fontWeight:'600'}
+import styles from './Appbar.module.css';
 
 export const Appbar = () => {
   const { jwt } = useContext(AppContext);
@@ -39,7 +41,7 @@ export const Appbar = () => {
 
               <Box sx={{ flexGrow: 1, display: 'flex', gap:'10px' }}>
                 {pages.map((page) => (
-                    <Link style={linkStyle} to={page.path} key={page.name}>{page.name}</Link>
+                    <Link className={styles.link} to={page.path} key={page.name}>{page.name}</Link>
                 ))}
               </Box>
             </Box>
@@ -47,9 +49,14 @@ export const Appbar = () => {
             <Box sx={{ display: 'flex' }}>
               {jwt ?
                 (
-                  <Link style={linkStyle} to={'/logout'}>LOGOUT</Link>
+                  <ProfilIconMenu popoverContent={
+                    <Link className={styles.linkProfil} to="/logout">
+                        <LogoutIcon />
+                        <Typography>Logout</Typography>
+                    </Link>
+                  } />
                 ) : (
-                  <Link style={linkStyle} to={'/login'}>LOGIN</Link>
+                  <Link className={styles.link} to={'/login'}>LOGIN</Link>
                 )
               }
             </Box>
