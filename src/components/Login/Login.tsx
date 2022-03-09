@@ -1,86 +1,88 @@
-import React, { FC } from 'react';
-import styles from './Login.module.css';
-import axios from 'axios';
-import { Button } from '@mui/material';
+import styles from "./Login.module.css";
+import React, { FC, useContext, useEffect, useState } from "react";
+import {
+  Alert,
+  Card,
+  CardContent,
+  Container,
+  FormControl,
+  Input,
+  InputLabel,
+  Snackbar,
+} from "@mui/material";
+import { ILoginForm, IResponseForm } from "../../types/formTypes";
+import UserService from "../../services/userService";
+import { LoginButton } from "..";
+import { isEmail } from "../../helper/formValidation";
 
+export const Login: FC = () => {
+  const userService = new UserService();
 
-export interface LoginResponse {
-  error: boolean;
-  message: string;
-}
+  const [loginForm, setLoginForm] = useState<ILoginForm>({
+    email: "",
+    password: "",
+  });
 
-interface LoginProps {
-  username:string;
-  password: string;
-  setLoginResponse: (loginResponse: LoginResponse) => void;
-}
+  const [loginResponse, setLoginResponse] = useState<IResponseForm>({
+    open: false,
+    error: false,
+    message: "",
+  });
+  const [open, setOpen] = useState(false);
 
-interface User {
-  id: number;
-  username: string;
-  password: string;
-}
-
-function login(username: string, password: string): User|undefined {
-  console.log(username, password);
-  const accounts: Array<User> = getAccounts();
-
-  if (!accounts) {
-    throw new Error('No accounts found');
-  }
-
-  const user: User|undefined = findUser(accounts, username);
-
-  if (!user) {
-    throw new Error('User not found');
-  }
-
-  if(!verifyPassword(user, password)) {
-    throw new Error('Wrong password');
-  }
-
-  return user;
-}
-
-function getAccounts(): Array<User> {
-  console.log(window.location.host+'/mock/account-mock.json');
-  const xhr = new XMLHttpRequest();
-  xhr.open('GET','http://'+window.location.host+'/mock/account-mock.json', false);
-  xhr.send();
-  const response = xhr.responseText;
-  console.log(response);
-  const accounts: Array<User> = JSON.parse(response);
-  console.log(accounts);
-  return accounts;
-}
-
-function findUser(accounts: Array<User>, username: string): User|undefined {
-  return accounts.find((user: User) => user.username === username);
-}
-
-function verifyPassword(user: User, password: string): boolean {
-  return user.password === password;
-}
-
-export const Login: FC<LoginProps> = ({username, password, setLoginResponse}) => (
-<Button
-  variant="contained"
-  onClick={() => {
-    try {
-      const user: User|undefined = login(username, password);
-      if (user) {
-        console.log(user);
-        setLoginResponse({error: false, message: 'Login success'});
-      }
-    } catch (error: any) {
-      console.log(error);
-      setLoginResponse({
-        error: true,
-        message: error?.message,
-      });
+  useEffect(() => {
+    if (loginResponse.open) {
+      setOpen(true);
     }
-  }}
->
-  Login
-</Button>
-);
+  }, [loginResponse]);
+
+  return (
+    <>
+      <FormControl className={styles.input}>
+        <InputLabel htmlFor="username">Email</InputLabel>
+        <Input
+          id="email"
+          margin="dense"
+          value={loginForm.email}
+          onChange={(e) => {
+            setLoginForm({ ...loginForm, email: e.target.value });
+          }}
+        />
+        {loginForm.email.length > 0 && !isEmail(loginForm.email) && (
+          <span>This is not an email</span>
+        )}
+      </FormControl>
+      <FormControl className={styles.input}>
+        <InputLabel htmlFor="password">Password</InputLabel>
+        <Input
+          id="password"
+          type="password"
+          margin="dense"
+          value={loginForm.password}
+          onChange={(e) => {
+            setLoginForm({ ...loginForm, password: e.target.value });
+          }}
+        />
+      </FormControl>
+      <FormControl className={styles.input}>
+        <LoginButton form={loginForm} setResponse={setLoginResponse} />
+      </FormControl>
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        autoHideDuration={2000}
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+        <Alert
+          sx={{ width: "100%" }}
+          severity={loginResponse?.error ? "error" : "success"}
+        >
+          {loginResponse && loginResponse.message}
+        </Alert>
+      </Snackbar>
+    </>
+  );
+};
