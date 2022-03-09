@@ -13,6 +13,9 @@ export default class Api {
     this.api_token = Cookies.get('api_token') ?? "";
     this.api_url = process.env.REACT_APP_API_URL ?? "";
 
+    axios.defaults.headers.post['Content-Type'] ='application/json;charset=utf-8';
+    axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
+    
     this.client = axios.create({
       baseURL: this.api_url,
       timeout: 5000,
