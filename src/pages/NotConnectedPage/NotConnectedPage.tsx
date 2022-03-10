@@ -1,10 +1,8 @@
-import React from "react";
-import {Container} from "@mui/material";
+import React from 'react';
+import { Container } from '@mui/material';
 
-import styles from "./NotConnected.module.css";
+import styles from './NotConnected.module.css';
 
 export const NotConnectedPage = () => (
-  <Container className={styles.NotConnectedPage}>
-    NotConnected
-  </Container>
+  <Container className={styles.NotConnectedPage}>NotConnected</Container>
 );

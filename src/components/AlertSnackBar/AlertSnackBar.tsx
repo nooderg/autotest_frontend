@@ -6,11 +6,10 @@ import { IResponseForm } from '../../types/formTypes';
 import styles from './AlertSnackBar.module.css';
 
 interface AlertSnackBarProps {
-  response: IResponseForm
+  response: IResponseForm;
 }
 
-export const AlertSnackBar: FC<AlertSnackBarProps> = ({response}) => {
-
+export const AlertSnackBar: FC<AlertSnackBarProps> = ({ response }) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -21,20 +20,20 @@ export const AlertSnackBar: FC<AlertSnackBarProps> = ({response}) => {
 
   return (
     <Snackbar
-    anchorOrigin={{
-      vertical: "bottom",
-      horizontal: "center",
-    }}
-    autoHideDuration={2000}
-    open={open}
-    onClose={() => setOpen(false)}
-  >
-    <Alert
-      sx={{ width: "100%" }}
-      severity={response?.error ? "error" : "success"}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'center',
+      }}
+      autoHideDuration={2000}
+      open={open}
+      onClose={() => setOpen(false)}
     >
-      {response && response.message}
-    </Alert>
-  </Snackbar>
+      <Alert
+        sx={{ width: '100%' }}
+        severity={response?.error ? 'error' : 'success'}
+      >
+        {response && response.message}
+      </Alert>
+    </Snackbar>
   );
-}
+};

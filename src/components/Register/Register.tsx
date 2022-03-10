@@ -1,28 +1,23 @@
-import React, { useState } from "react";
-import styles from "./Register.module.css";
-import {
-  FormControl,
-  Input,
-  InputLabel,
-} from "@mui/material";
-import { IRegisterForm, IResponseForm } from "../../types/formTypes";
-import { isEmail } from "../../helper/formValidation";
-import { RegisterButton, AlertSnackBar } from "..";
+import React, { useState } from 'react';
+import styles from './Register.module.css';
+import { FormControl, Input, InputLabel } from '@mui/material';
+import { IRegisterForm, IResponseForm } from '../../types/formTypes';
+import { isEmail } from '../../helper/formValidation';
+import { RegisterButton, AlertSnackBar } from '..';
 
 export const Register = () => {
-
   const [registerForm, setRegisterForm] = useState<IRegisterForm>({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
 
   const [registerResponse, setRegisterResponse] = useState<IResponseForm>({
     open: false,
     error: false,
-    message: "",
+    message: '',
   });
 
   return (
@@ -37,7 +32,9 @@ export const Register = () => {
           }}
         />
       </FormControl>
-      {registerForm.firstName.length == 0 && <span>Please fill in this field</span>}
+      {registerForm.firstName.length == 0 && (
+        <span>Please fill in this field</span>
+      )}
 
       <FormControl className={styles.input}>
         <InputLabel htmlFor="username">Last name</InputLabel>
@@ -49,7 +46,9 @@ export const Register = () => {
           }}
         />
       </FormControl>
-      {registerForm.firstName.length == 0 && <span>Please fill in this field</span>}
+      {registerForm.firstName.length == 0 && (
+        <span>Please fill in this field</span>
+      )}
 
       <FormControl className={styles.input}>
         <InputLabel htmlFor="username">E-mail</InputLabel>
@@ -93,14 +92,14 @@ export const Register = () => {
       </FormControl>
 
       {registerForm.password !== registerForm.confirmPassword
-        ? "Mot de passe différents"
-        : ""}
+        ? 'Mot de passe différents'
+        : ''}
 
       <FormControl className={styles.input}>
         <RegisterButton form={registerForm} setResponse={setRegisterResponse} />
       </FormControl>
 
-      <AlertSnackBar response={registerResponse}/>
+      <AlertSnackBar response={registerResponse} />
     </div>
   );
 };

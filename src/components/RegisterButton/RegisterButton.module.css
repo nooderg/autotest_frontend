@@ -1,5 +1,6 @@
-.RegisterButton {}
+.RegisterButton {
+}
 
-.MuiFormControl-root{
-    margin: 15px 0px;
+.MuiFormControl-root {
+  margin: 15px 0px;
 }

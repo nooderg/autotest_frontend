@@ -1,26 +1,21 @@
-import styles from "./Login.module.css";
-import React, { FC, useState } from "react";
-import {
-  FormControl,
-  Input,
-  InputLabel,
-} from "@mui/material";
+import styles from './Login.module.css';
+import React, { FC, useState } from 'react';
+import { FormControl, Input, InputLabel } from '@mui/material';
 
-import { ILoginForm, IResponseForm } from "../../types/formTypes";
-import { AlertSnackBar, LoginButton } from "..";
-import { isEmail } from "../../helper/formValidation";
+import { ILoginForm, IResponseForm } from '../../types/formTypes';
+import { AlertSnackBar, LoginButton } from '..';
+import { isEmail } from '../../helper/formValidation';
 
 export const Login: FC = () => {
-
   const [loginForm, setLoginForm] = useState<ILoginForm>({
-    email: "",
-    password: "",
+    email: '',
+    password: '',
   });
 
   const [loginResponse, setLoginResponse] = useState<IResponseForm>({
     open: false,
     error: false,
-    message: "",
+    message: '',
   });
 
   return (
@@ -54,7 +49,7 @@ export const Login: FC = () => {
       <FormControl className={styles.input}>
         <LoginButton form={loginForm} setResponse={setLoginResponse} />
       </FormControl>
-      
+
       <AlertSnackBar response={loginResponse} />
     </div>
   );

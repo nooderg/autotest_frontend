@@ -1,13 +1,13 @@
 .RegisterCard {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .input {
-    margin-top: 20px !important;
+  margin-top: 20px !important;
 }
 
-.error{
-    color: red;
-    margin: 5px 0px;
+.error {
+  color: red;
+  margin: 5px 0px;
 }
