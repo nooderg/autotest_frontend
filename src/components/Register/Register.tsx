@@ -1,6 +1,7 @@
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import styles from "./Register.module.css";
 import {
+  Alert,
   Button,
   Card,
   CardContent,
@@ -8,16 +9,15 @@ import {
   FormControl,
   Input,
   InputLabel,
+  Snackbar,
 } from "@mui/material";
 import Api from "../../helper/api";
-import { IRegisterForm } from "../../types/formTypes";
+import { IRegisterForm, IResponseForm } from "../../types/formTypes";
 import RegisterButton from "../RegisterButton/RegisterButton";
 import { isEmail } from "../../helper/formValidation";
 
 export const Register = () => {
-  const api = new Api();
 
-  const [registerResponse, setRegisterResponse] = useState<boolean>(false);
   const [registerForm, setRegisterForm] = useState<IRegisterForm>({
     firstName: "",
     lastName: "",
@@ -25,6 +25,20 @@ export const Register = () => {
     password: "",
     confirmPassword: "",
   });
+
+  const [registerResponse, setRegisterResponse] = useState<IResponseForm>({
+    open: false,
+    error: false,
+    message: "",
+  });
+
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (registerResponse.open) {
+      setOpen(true);
+    }
+  }, [registerResponse]);
 
   return (
     <div className={styles.Register}>
@@ -99,8 +113,24 @@ export const Register = () => {
 
       <FormControl className={styles.input}>
         <RegisterButton form={registerForm} setResponse={setRegisterResponse} />
-        {registerResponse && "Votre compte est bien enregistré !"}
       </FormControl>
+
+      <Snackbar
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        autoHideDuration={2000}
+        open={open}
+        onClose={() => setOpen(false)}
+      >
+        <Alert
+          sx={{ width: "100%" }}
+          severity={registerResponse?.error ? "error" : "success"}
+        >
+          {registerResponse && registerResponse.message}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };
