@@ -37,7 +37,7 @@ export const Login: FC = () => {
   }, [loginResponse]);
 
   return (
-    <>
+    <div>
       <FormControl className={styles.input}>
         <InputLabel htmlFor="username">Email</InputLabel>
         <Input
@@ -83,6 +83,6 @@ export const Login: FC = () => {
           {loginResponse && loginResponse.message}
         </Alert>
       </Snackbar>
-    </>
+    </div>
   );
 };

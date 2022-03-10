@@ -8,10 +8,6 @@ import UserService from "../../services/userService";
 import { AxiosResponse } from "axios";
 import { isEmail } from "../../helper/formValidation";
 
-
-
-
-
 interface LoginButtonProps {
   form: ILoginForm;
   setResponse: (response: IResponseForm) => void;
@@ -39,7 +35,7 @@ export const LoginButton: FC<LoginButtonProps> = ({ form, setResponse }) => {
         const userService = new UserService();
 
         userService.login(form).then((jwt: AxiosResponse<string, Error>) => {
-          sessionStorage.setItem('jwt', jwt.data);
+          setJwt(jwt.data);
 
           setResponse({
             error: false,
@@ -47,8 +43,6 @@ export const LoginButton: FC<LoginButtonProps> = ({ form, setResponse }) => {
             open: true,
           });
         }).catch((error: Error) => {
-          //localStorage.setItem("jwt", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5NzJiMGMxNy00ODQwLTQzN2UtOTQzYy04MzM2ZjRkMTgzZjUiLCJleHAiOjE2NDczMzUwMjh9.jspmTR02-MaB8yWazrWnoKhzeB7ZVCUnMTCahNwZU0Q");
-          setJwt("eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5NzJiMGMxNy00ODQwLTQzN2UtOTQzYy04MzM2ZjRkMTgzZjUiLCJleHAiOjE2NDczMzUwMjh9.jspmTR02-MaB8yWazrWnoKhzeB7ZVCUnMTCahNwZU0Q");
           setResponse({
             error: true,
             message: error.message,
