@@ -57,7 +57,7 @@ export const RegisterButton: FC<RegisterButtonProps> = ({ form, setResponse }) =
           .catch((error: Error) => {
             setResponse({
               error: true,
-              message: error.message,
+              message: "error when registering, please try again",
               open: true,
             });
           });

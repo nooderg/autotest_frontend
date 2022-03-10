@@ -44,7 +44,7 @@ export const LoginButton: FC<LoginButtonProps> = ({ form, setResponse }) => {
         }).catch((error: Error) => {
           setResponse({
             error: true,
-            message: error.message,
+            message: "unknown user or password, please try again",
             open: true,
           });
         });
