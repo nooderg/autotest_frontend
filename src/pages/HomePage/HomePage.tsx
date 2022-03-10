@@ -12,6 +12,10 @@ import DownloadIcon from "@mui/icons-material/Download";
 import Tooltip from "@mui/material/Tooltip";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import axios from "axios";
+import { fileToBase64 } from "../../helper/formValidation";
+import Api from "../../helper/api";
+
+
 
 interface IDropzoneProps {
   setFiles: (files: File[] | ((prevVar: File[]) => File[])) => void;
@@ -22,7 +26,9 @@ export function HomePage() {
   const [generatedFile, setGeneratedFile] = useState<string>("");
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
-  function Dropzone({ setFiles }: IDropzoneProps) {
+
+
+function Dropzone({ setFiles }: IDropzoneProps) {
     const onDrop = useCallback((acceptedFiles) => {
       console.log(acceptedFiles);
       if (acceptedFiles.length === 0) {
@@ -33,9 +39,23 @@ export function HomePage() {
         alert("Only YAML files can be uploaded");
       } else {
         setFiles([acceptedFiles[0]]);
-        axios.get("/mock/test.tavern.yaml").then((res) => {
-          setGeneratedFile(res.data);
+
+        fileToBase64(acceptedFiles[0]).then(function(r){
+          const api = Api.getInstance();
+
+          api.post("/testing/generate",{file:r}).then((res) => {
+            setGeneratedFile(res.data);
+          });
+
+
+
+
+
         });
+
+        
+        
+       
         console.log(files);
       }
     }, []);
