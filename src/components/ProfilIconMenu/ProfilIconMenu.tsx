@@ -1,14 +1,17 @@
 import { Avatar, Button, Popover, Box } from '@mui/material';
 import React, { FC } from 'react';
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import styles from './ProfilIconMenu.module.css';
 
 interface ProfilIconMenuProps {
   popoverContent: JSX.Element;
 }
 
-export const ProfilIconMenu: FC<ProfilIconMenuProps> = ({popoverContent}) => {
-
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
+export const ProfilIconMenu: FC<ProfilIconMenuProps> = ({ popoverContent }) => {
+  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+    null,
+  );
   const open = Boolean(anchorEl);
 
   return (
@@ -25,10 +28,8 @@ export const ProfilIconMenu: FC<ProfilIconMenuProps> = ({popoverContent}) => {
           horizontal: 'left',
         }}
       >
-        <Box sx={{ p: 2 }}>
-          {popoverContent}
-        </Box>
+        <Box sx={{ p: 2 }}>{popoverContent}</Box>
       </Popover>
     </div>
   );
-}
+};

@@ -1,12 +1,11 @@
-import React, { FC, useContext, useEffect, useState } from "react";
-import styles from './LoginButton.module.css';
-import { Button, formGroupClasses } from "@mui/material";
-import { ILoginForm, IResponseForm } from "../../types/formTypes";
-import { AppContext } from '../../App';
+import React, { FC, useContext, useEffect, useState } from 'react';
+import { Button } from '@mui/material';
+import { AxiosResponse } from 'axios';
 
-import UserService from "../../services/userService";
-import { AxiosResponse } from "axios";
-import { isEmail } from "../../helper/formValidation";
+import { ILoginForm, IResponseForm } from '../../types/formTypes';
+import { AppContext } from '../../App';
+import UserService from '../../services/userService';
+import { isEmail } from '../../helper/formValidation';
 
 interface LoginButtonProps {
   form: ILoginForm;
@@ -16,16 +15,15 @@ interface LoginButtonProps {
 export const LoginButton: FC<LoginButtonProps> = ({ form, setResponse }) => {
   const { setJwt } = useContext(AppContext);
 
-  const [formIsCompleted,setFormisComplete] = useState(false)
+  const [formIsCompleted, setFormisComplete] = useState(false);
 
-  const isCompleted = (form:ILoginForm):boolean => {
-    return !(form.email !== "" && form.password !== "" && isEmail(form.email))
-  }
+  const isCompleted = (form: ILoginForm): boolean => {
+    return !(form.email !== '' && form.password !== '' && isEmail(form.email));
+  };
 
-
-  useEffect(()=>{
-    setFormisComplete(isCompleted(form))
-  },[form])
+  useEffect(() => {
+    setFormisComplete(isCompleted(form));
+  }, [form]);
 
   return (
     <Button
@@ -34,25 +32,27 @@ export const LoginButton: FC<LoginButtonProps> = ({ form, setResponse }) => {
       onClick={() => {
         const userService = new UserService();
 
-        userService.login(form).then((jwt: AxiosResponse<string, Error>) => {
-          setJwt(jwt.data);
+        userService
+          .login(form)
+          .then((jwt: AxiosResponse<string, Error>) => {
+            setJwt(jwt.data);
 
-          setResponse({
-            error: false,
-            message: "Login success",
-            open: true,
+            setResponse({
+              error: false,
+              message: 'Login success',
+              open: true,
+            });
+          })
+          .catch(() => {
+            setResponse({
+              error: true,
+              message: 'unknown user or password, please try again',
+              open: true,
+            });
           });
-        }).catch((error: Error) => {
-          setResponse({
-            error: true,
-            message: error.message,
-            open: true,
-          });
-        });
       }}
     >
       Login
     </Button>
-  )
-}
-
+  );
+};

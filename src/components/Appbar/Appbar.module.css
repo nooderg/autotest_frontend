@@ -1,16 +1,17 @@
-.Appbar {}
+.Appbar {
+}
 
 .link {
-    color: #fff;
-    text-decoration: none;
-    margin-left: 8px;
-    font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  margin-left: 8px;
+  font-weight: 600;
 }
 
 .linkProfil {
-    color: #000;
-    text-decoration: none;
-    margin-left: 8px;
-    font-weight: 600;
-    display: flex;
+  color: #000;
+  text-decoration: none;
+  margin-left: 8px;
+  font-weight: 600;
+  display: flex;
 }

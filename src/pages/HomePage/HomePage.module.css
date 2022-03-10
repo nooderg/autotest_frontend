@@ -1,29 +1,30 @@
-.HomePage {}
+.HomePage {
+}
 
 .dropzone {
-    border: 2px dashed #0087F7;
-    border-radius: 5px;
-    min-height: 20vh;
-    padding: 80px;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 20px 0;
-    cursor: pointer;
+  border: 2px dashed #0087f7;
+  border-radius: 5px;
+  min-height: 20vh;
+  padding: 80px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+  cursor: pointer;
 }
 
 .fileCard {
-    text-align: left;
-    margin: 20px;
-    white-space: pre-line;
-    font-size: 14px;
+  text-align: left;
+  margin: 20px;
+  white-space: pre-line;
+  font-size: 14px;
 }
 
-.download_zone{
-    display: flex;
-    gap:10px;
-    justify-content: flex-end;
-    width: calc(100% - 40px);
-    margin: 20px;
+.download_zone {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  width: calc(100% - 40px);
+  margin: 20px;
 }

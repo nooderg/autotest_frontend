@@ -1,14 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { LoginButton } from './LoginButton';
+import { AlertSnackBar } from './AlertSnackBar';
 
 it('It should mount', () => {
   const div = document.createElement('div');
   ReactDOM.render(
-    <LoginButton
-      form={{ email: '', password: '' }}
-      setResponse={() => {
-        console.log('set response');
+    <AlertSnackBar
+      response={{
+        open: false,
+        message: '',
+        error: false,
       }}
     />,
     div,

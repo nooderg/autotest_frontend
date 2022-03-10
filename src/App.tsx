@@ -1,5 +1,5 @@
-import React, { createContext, FC, useContext, useState } from 'react';
-import { Routes, Route, Outlet, Navigate } from "react-router-dom";
+import React, { createContext, useContext, useState } from 'react';
+import { Routes, Route, Outlet, Navigate } from 'react-router-dom';
 
 import './App.css';
 import { Appbar } from './components';
@@ -12,11 +12,11 @@ interface AppContextInterface {
 }
 
 const defaultContextApp: AppContextInterface = {
-  jwt: localStorage.jwt ?? "",
+  jwt: localStorage.jwt ?? '',
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   setJwt: function (_jwt: string): void {
     throw new Error('Function not implemented.');
-  }
+  },
 };
 
 export const AppContext = createContext<AppContextInterface>(defaultContextApp);
@@ -24,39 +24,41 @@ export const AppContext = createContext<AppContextInterface>(defaultContextApp);
 const PrivateRoute = () => {
   const { jwt } = useContext(AppContext);
   return jwt ? <Outlet /> : <Navigate to="/login" />;
-}
+};
 
 function Logout() {
   const { setJwt } = useContext(AppContext);
-  setJwt("");
+  setJwt('');
   return <Navigate to="/login" />;
 }
 
 function App() {
   const [jwtState, setJwtState] = useState(defaultContextApp.jwt);
   const setJwt = (jwt: string) => {
-    if (jwt === "") {
-      localStorage.removeItem("jwt");
+    if (jwt === '') {
+      localStorage.removeItem('jwt');
     } else {
-      localStorage.setItem("jwt", jwt);
+      localStorage.setItem('jwt', jwt);
     }
     setJwtState(jwt);
-  }
+  };
 
   return (
     <div className="App">
-      <AppContext.Provider value={{
-        jwt: jwtState,
-        setJwt
-      }}>
-        <Appbar/>
+      <AppContext.Provider
+        value={{
+          jwt: jwtState,
+          setJwt,
+        }}
+      >
+        <Appbar />
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/login" element={<LoginPage  />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path='/app' element={<PrivateRoute />}>
-            <Route path='/app' element={<HomePage/>}/>
+          <Route path="/app" element={<PrivateRoute />}>
+            <Route path="/app" element={<HomePage />} />
           </Route>
           <Route path="*" element={<NotConnectedPage />} />
         </Routes>

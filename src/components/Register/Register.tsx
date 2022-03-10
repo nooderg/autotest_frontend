@@ -1,44 +1,24 @@
-import React, { FC, useEffect, useState } from "react";
-import styles from "./Register.module.css";
-import {
-  Alert,
-  Button,
-  Card,
-  CardContent,
-  Container,
-  FormControl,
-  Input,
-  InputLabel,
-  Snackbar,
-} from "@mui/material";
-import Api from "../../helper/api";
-import { IRegisterForm, IResponseForm } from "../../types/formTypes";
-import RegisterButton from "../RegisterButton/RegisterButton";
-import { isEmail } from "../../helper/formValidation";
+import React, { useState } from 'react';
+import styles from './Register.module.css';
+import { FormControl, Input, InputLabel } from '@mui/material';
+import { IRegisterForm, IResponseForm } from '../../types/formTypes';
+import { isEmail } from '../../helper/formValidation';
+import { RegisterButton, AlertSnackBar } from '..';
 
 export const Register = () => {
-
   const [registerForm, setRegisterForm] = useState<IRegisterForm>({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
   });
 
   const [registerResponse, setRegisterResponse] = useState<IResponseForm>({
     open: false,
     error: false,
-    message: "",
+    message: '',
   });
-
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (registerResponse.open) {
-      setOpen(true);
-    }
-  }, [registerResponse]);
 
   return (
     <div className={styles.Register}>
@@ -52,7 +32,9 @@ export const Register = () => {
           }}
         />
       </FormControl>
-      {registerForm.firstName.length == 0 && <span>Please fill in this field</span>}
+      {registerForm.firstName.length == 0 && (
+        <span>Please fill in this field</span>
+      )}
 
       <FormControl className={styles.input}>
         <InputLabel htmlFor="username">Last name</InputLabel>
@@ -64,7 +46,9 @@ export const Register = () => {
           }}
         />
       </FormControl>
-      {registerForm.firstName.length == 0 && <span>Please fill in this field</span>}
+      {registerForm.firstName.length == 0 && (
+        <span>Please fill in this field</span>
+      )}
 
       <FormControl className={styles.input}>
         <InputLabel htmlFor="username">E-mail</InputLabel>
@@ -108,31 +92,14 @@ export const Register = () => {
       </FormControl>
 
       {registerForm.password !== registerForm.confirmPassword
-        ? "Mot de passe différents"
-        : ""}
+        ? 'Mot de passe différents'
+        : ''}
 
       <FormControl className={styles.input}>
         <RegisterButton form={registerForm} setResponse={setRegisterResponse} />
       </FormControl>
 
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
-        }}
-        autoHideDuration={2000}
-        open={open}
-        onClose={() => setOpen(false)}
-      >
-        <Alert
-          sx={{ width: "100%" }}
-          severity={registerResponse?.error ? "error" : "success"}
-        >
-          {registerResponse && registerResponse.message}
-        </Alert>
-      </Snackbar>
+      <AlertSnackBar response={registerResponse} />
     </div>
   );
 };
-
-export default Register;

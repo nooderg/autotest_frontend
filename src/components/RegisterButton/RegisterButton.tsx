@@ -1,28 +1,31 @@
-import React, { FC, useEffect, useState } from "react";
-import styles from "./RegisterButton.module.css";
-import { IRegisterForm, IResponseForm } from "../../types/formTypes";
-import { Button } from "@mui/material";
-import { isEmail } from "../../helper/formValidation";
-import { AxiosResponse } from "axios";
-import UserService from "../../services/userService";
-import { IUser } from "../../types/userTypes";
+import React, { FC, useEffect, useState } from 'react';
+import styles from './RegisterButton.module.css';
+import { IRegisterForm, IResponseForm } from '../../types/formTypes';
+import { Button } from '@mui/material';
+import { isEmail } from '../../helper/formValidation';
+import { AxiosResponse } from 'axios';
+import UserService from '../../services/userService';
+import { IUser } from '../../types/userTypes';
 
 interface RegisterButtonProps {
   form: IRegisterForm;
   setResponse: (response: IResponseForm) => void;
 }
 
-const RegisterButton: FC<RegisterButtonProps> = ({ form, setResponse }) => {
+export const RegisterButton: FC<RegisterButtonProps> = ({
+  form,
+  setResponse,
+}) => {
   const [registeriserror, setregisteriserror] = useState<boolean>(false);
 
   const isCompleted = (form: IRegisterForm): boolean => {
     return !(
-      form.firstName !== "" &&
-      form.lastName !== "" &&
-      form.email !== "" &&
+      form.firstName !== '' &&
+      form.lastName !== '' &&
+      form.email !== '' &&
       isEmail(form.email) &&
-      form.password !== "" &&
-      form.confirmPassword !== "" &&
+      form.password !== '' &&
+      form.confirmPassword !== '' &&
       form.password == form.confirmPassword
     );
   };
@@ -46,17 +49,18 @@ const RegisterButton: FC<RegisterButtonProps> = ({ form, setResponse }) => {
             email: form.email,
             password: form.password,
           })
-          .then((result: AxiosResponse<IUser, Error>) => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          .then((_: AxiosResponse<IUser, Error>) => {
             setResponse({
               error: false,
-              message: "Login success",
+              message: 'Login success',
               open: true,
             });
           })
-          .catch((error: Error) => {
+          .catch(() => {
             setResponse({
               error: true,
-              message: error.message,
+              message: 'error when registering, please try again',
               open: true,
             });
           });
@@ -67,5 +71,3 @@ const RegisterButton: FC<RegisterButtonProps> = ({ form, setResponse }) => {
     </Button>
   );
 };
-
-export default RegisterButton;
