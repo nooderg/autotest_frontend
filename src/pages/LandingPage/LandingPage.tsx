@@ -1,10 +1,10 @@
-import { Button, Card, CardContent, Typography, Grid } from '@mui/material';
+import { Button, Card, CardContent, Typography, Grid, Container } from '@mui/material';
 import React from "react";
 import styles from "./LandingPage.module.css";
 import web_hosting from "./web_hosting.svg";
 import CardActions from '@mui/material/CardActions';
 import CardMedia from '@mui/material/CardMedia';
-import { teamList } from '../../components/datas/TeamList';
+import { teamList } from './teamList';
 import linkedin from "../../assets/linkedin.png";
 
 export const LandingPage = () => (
@@ -67,7 +67,7 @@ export const LandingPage = () => (
         </div>
       </div>
     </div>
-    <div style={{padding: 15}}>
+    <Container style={{padding: 15}}>
       <h3>Notre équipe</h3>
       <Grid container spacing={2} style={{display: "flex", justifyContent: "center"}}>
         {teamList.map((member, key)=>(
@@ -95,6 +95,6 @@ export const LandingPage = () => (
               </Card>
         ))}
          </Grid>
-      </div>
+      </Container>
   </div>
 );

@@ -4,6 +4,7 @@ import bastien from '../../assets/bastien.png'
 import guillaume from '../../assets/guillaume.png'
 import carolyne from '../../assets/carolyne.png'
 import arthur from '../../assets/arthur.png'
+import defaultAvatar from '../../assets/default.png'
 
 export const teamList = [
 	{
@@ -32,7 +33,7 @@ export const teamList = [
 		name: 'Cédric Pierre-Auguste',
 		job: 'Full-Stack Developper',
 		description: '1ed',
-		img: 'cedric.png',
+		img: defaultAvatar,
 		linkedin: 'https://www.linkedin.com/in/c%C3%A9dric-pierre-auguste-9a97a3175/'
 
 	},
@@ -48,7 +49,7 @@ export const teamList = [
 		name: 'Carolyne Fernandez',
 		job: 'Back-End Developper',
 		description: '1ed',
-		img: carolyne,
+		img: defaultAvatar,
 		linkedin: 'https://www.linkedin.com/in/carolyne-nicolle-fernandez-prada-lazo-84a048113/'
 	}, 
 	{
