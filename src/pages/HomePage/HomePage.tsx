@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import styles from './HomePage.module.css';
 import { useDropzone } from 'react-dropzone';
 import { Button, Card, CardContent, Container } from '@mui/material';
@@ -9,19 +9,26 @@ import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 import { fileToBase64 } from '../../helper/formValidation';
 import Api from '../../helper/api';
+import { AlertSnackBar } from '../../components';
+import { IResponseForm } from '../../types/formTypes';
 
 interface IDropzoneProps {
   setFiles: (files: File[] | ((prevVar: File[]) => File[])) => void;
 }
 
 export function HomePage() {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [files, setFiles] = useState<Array<File>>([]);
   const [generatedFile, setGeneratedFile] = useState<string>('');
   const [isCopied, setIsCopied] = useState<boolean>(false);
+  const [fileResponse, setFileResponse] = useState<IResponseForm>({
+    error: false,
+    message: '',
+    open: false,
+  });
 
   function Dropzone({ setFiles }: IDropzoneProps) {
     const onDrop = useCallback((acceptedFiles) => {
-      console.log(acceptedFiles);
       if (acceptedFiles.length === 0) {
         alert('No files were uploaded');
       } else if (acceptedFiles.length > 1) {
@@ -36,10 +43,15 @@ export function HomePage() {
 
           api.post('/testing/generate', { file: r }).then((res) => {
             setGeneratedFile(res.data);
+          }).catch(() => {
+            setFiles([]);
+            setFileResponse({
+              error: true,
+              message: 'Error generating file',
+              open: true,
+            });
           });
         });
-
-        console.log(files);
       }
     }, []);
 
@@ -74,20 +86,15 @@ export function HomePage() {
   const copyToClipboard = async () => {
     await navigator.clipboard.writeText(generatedFile);
     setIsCopied(true);
-    console.log('is Copied !');
   };
 
   const handleTooltipClose = () => {
     setIsCopied(false);
   };
 
-  useEffect(() => {
-    console.log(files);
-  }, [files]);
-
   return (
     <Container className={styles.HomePage}>
-      {files.length > 0 ? (
+      {generatedFile !== '' ? (
         <div>
           <div className={styles.download_zone}>
             <Button
@@ -134,6 +141,7 @@ export function HomePage() {
       ) : (
         <Dropzone setFiles={setFiles} />
       )}
+      <AlertSnackBar response={fileResponse} />
     </Container>
   );
 }

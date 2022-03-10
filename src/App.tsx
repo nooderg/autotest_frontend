@@ -1,4 +1,4 @@
-import React, { createContext, FC, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 import { Routes, Route, Outlet, Navigate } from 'react-router-dom';
 
 import './App.css';
