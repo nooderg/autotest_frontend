@@ -15,7 +15,7 @@ import styles from './Appbar.module.css';
 export const Appbar = () => {
   const { jwt } = useContext(AppContext);
 
-  const pages = [{ name: 'HOME', path: '/' }];
+  const pages = [];
 
   if (jwt === '') {
     pages.push({ name: 'REGISTER', path: '/register' });
@@ -37,8 +37,11 @@ export const Appbar = () => {
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <Typography variant="h6" noWrap component="div">
-                AUTOTEST
+                <Link className={styles.link} to="/">
+                  AUTOTEST
+                </Link>
               </Typography>
+
 
               <Box sx={{ flexGrow: 1, display: 'flex', gap: '10px' }}>
                 {pages.map((page) => (
