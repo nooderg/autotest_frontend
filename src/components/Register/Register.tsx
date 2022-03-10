@@ -1,17 +1,10 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { useState } from "react";
 import styles from "./Register.module.css";
 import {
-  Alert,
-  Button,
-  Card,
-  CardContent,
-  Container,
   FormControl,
   Input,
   InputLabel,
-  Snackbar,
 } from "@mui/material";
-import Api from "../../helper/api";
 import { IRegisterForm, IResponseForm } from "../../types/formTypes";
 import { isEmail } from "../../helper/formValidation";
 import { RegisterButton, AlertSnackBar } from "..";

@@ -42,6 +42,7 @@ export default class Api {
     this.client.defaults.headers.post['Authorization'] = `Bearer ${this.api_token}`;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   post = (url: string, data: any) => {
     return this.client.post(url, data);
   }

@@ -1,5 +1,7 @@
 import { Avatar, Button, Popover, Box } from '@mui/material';
 import React, { FC } from 'react';
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import styles from './ProfilIconMenu.module.css';
 
 interface ProfilIconMenuProps {

@@ -1,17 +1,12 @@
 import styles from "./Login.module.css";
-import React, { FC, useContext, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import {
-  Alert,
-  Card,
-  CardContent,
-  Container,
   FormControl,
   Input,
   InputLabel,
-  Snackbar,
 } from "@mui/material";
+
 import { ILoginForm, IResponseForm } from "../../types/formTypes";
-import UserService from "../../services/userService";
 import { AlertSnackBar, LoginButton } from "..";
 import { isEmail } from "../../helper/formValidation";
 

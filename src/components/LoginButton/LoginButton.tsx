@@ -1,11 +1,10 @@
 import React, { FC, useContext, useEffect, useState } from "react";
-import styles from './LoginButton.module.css';
-import { Button, formGroupClasses } from "@mui/material";
+import { Button } from "@mui/material";
+import { AxiosResponse } from "axios";
+
 import { ILoginForm, IResponseForm } from "../../types/formTypes";
 import { AppContext } from '../../App';
-
 import UserService from "../../services/userService";
-import { AxiosResponse } from "axios";
 import { isEmail } from "../../helper/formValidation";
 
 interface LoginButtonProps {

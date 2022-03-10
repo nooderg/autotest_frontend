@@ -11,7 +11,7 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import DownloadIcon from "@mui/icons-material/Download";
 import Tooltip from "@mui/material/Tooltip";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
-import axios from "axios";
+
 import { fileToBase64 } from "../../helper/formValidation";
 import Api from "../../helper/api";
 

@@ -46,7 +46,8 @@ export const RegisterButton: FC<RegisterButtonProps> = ({ form, setResponse }) =
             email: form.email,
             password: form.password,
           })
-          .then((result: AxiosResponse<IUser, Error>) => {
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+          .then((_: AxiosResponse<IUser, Error>) => {
             setResponse({
               error: false,
               message: "Login success",

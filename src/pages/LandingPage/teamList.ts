@@ -2,7 +2,6 @@ import chabha from '../../assets/chabha.png'
 import theo from '../../assets/theo.png'
 import bastien from '../../assets/bastien.png'
 import guillaume from '../../assets/guillaume.png'
-import carolyne from '../../assets/carolyne.png'
 import arthur from '../../assets/arthur.png'
 import defaultAvatar from '../../assets/default.png'
 
