@@ -1,7 +1,11 @@
-import { Button } from "@mui/material";
+import { Button, Card, CardContent, Typography, Grid, Container } from '@mui/material';
 import React from "react";
 import styles from "./LandingPage.module.css";
 import web_hosting from "./web_hosting.svg";
+import CardActions from '@mui/material/CardActions';
+import CardMedia from '@mui/material/CardMedia';
+import { teamList } from './teamList';
+import linkedin from "../../assets/linkedin.png";
 
 export const LandingPage = () => (
   <div className={styles.LandingPage}>
@@ -63,5 +67,34 @@ export const LandingPage = () => (
         </div>
       </div>
     </div>
+    <Container style={{padding: 15}}>
+      <h3>Notre équipe</h3>
+      <Grid container spacing={2} style={{display: "flex", justifyContent: "center"}}>
+        {teamList.map((member, key)=>(
+              <Card sx={{ maxWidth: 345 }} key={key} style={{width: "200px", margin: "10px"}}>
+                <CardMedia
+                  component="img"
+                  height="65%"
+                  image={member.img}
+                  alt={member.name}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="div" style={{height: "40px", fontWeight: "600", fontSize: "16px"}}>
+                    {member.name}
+                  </Typography>
+                  <div style={{display: "flex", height: "20%"}}>
+                      <Typography variant="body2" color="text.secondary" style={{display: "flex", justifyContent: "spaceBetween"}}>
+                        {member.job}
+                      </Typography>
+                      <CardActions style={{display: "flex", justifyContent: "end"}}>
+                      <a href={member.linkedin}>
+                        <img src={linkedin} style={{width: "20px"}}></img></a>
+                    </CardActions>
+                  </div>
+                </CardContent>
+              </Card>
+        ))}
+         </Grid>
+      </Container>
   </div>
 );
