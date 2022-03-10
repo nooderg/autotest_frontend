@@ -12,7 +12,7 @@ interface RegisterButtonProps {
   setResponse: (response: IResponseForm) => void;
 }
 
-const RegisterButton: FC<RegisterButtonProps> = ({ form, setResponse }) => {
+export const RegisterButton: FC<RegisterButtonProps> = ({ form, setResponse }) => {
   const [registeriserror, setregisteriserror] = useState<boolean>(false);
 
   const isCompleted = (form: IRegisterForm): boolean => {
@@ -67,5 +67,3 @@ const RegisterButton: FC<RegisterButtonProps> = ({ form, setResponse }) => {
     </Button>
   );
 };
-
-export default RegisterButton;

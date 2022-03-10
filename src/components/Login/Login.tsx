@@ -12,11 +12,10 @@ import {
 } from "@mui/material";
 import { ILoginForm, IResponseForm } from "../../types/formTypes";
 import UserService from "../../services/userService";
-import { LoginButton } from "..";
+import { AlertSnackBar, LoginButton } from "..";
 import { isEmail } from "../../helper/formValidation";
 
 export const Login: FC = () => {
-  const userService = new UserService();
 
   const [loginForm, setLoginForm] = useState<ILoginForm>({
     email: "",
@@ -28,13 +27,6 @@ export const Login: FC = () => {
     error: false,
     message: "",
   });
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (loginResponse.open) {
-      setOpen(true);
-    }
-  }, [loginResponse]);
 
   return (
     <div>
@@ -67,22 +59,8 @@ export const Login: FC = () => {
       <FormControl className={styles.input}>
         <LoginButton form={loginForm} setResponse={setLoginResponse} />
       </FormControl>
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
-        }}
-        autoHideDuration={2000}
-        open={open}
-        onClose={() => setOpen(false)}
-      >
-        <Alert
-          sx={{ width: "100%" }}
-          severity={loginResponse?.error ? "error" : "success"}
-        >
-          {loginResponse && loginResponse.message}
-        </Alert>
-      </Snackbar>
+      
+      <AlertSnackBar response={loginResponse} />
     </div>
   );
 };

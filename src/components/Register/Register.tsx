@@ -13,8 +13,8 @@ import {
 } from "@mui/material";
 import Api from "../../helper/api";
 import { IRegisterForm, IResponseForm } from "../../types/formTypes";
-import RegisterButton from "../RegisterButton/RegisterButton";
 import { isEmail } from "../../helper/formValidation";
+import { RegisterButton, AlertSnackBar } from "..";
 
 export const Register = () => {
 
@@ -31,14 +31,6 @@ export const Register = () => {
     error: false,
     message: "",
   });
-
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (registerResponse.open) {
-      setOpen(true);
-    }
-  }, [registerResponse]);
 
   return (
     <div className={styles.Register}>
@@ -115,24 +107,7 @@ export const Register = () => {
         <RegisterButton form={registerForm} setResponse={setRegisterResponse} />
       </FormControl>
 
-      <Snackbar
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "center",
-        }}
-        autoHideDuration={2000}
-        open={open}
-        onClose={() => setOpen(false)}
-      >
-        <Alert
-          sx={{ width: "100%" }}
-          severity={registerResponse?.error ? "error" : "success"}
-        >
-          {registerResponse && registerResponse.message}
-        </Alert>
-      </Snackbar>
+      <AlertSnackBar response={registerResponse}/>
     </div>
   );
 };
-
-export default Register;

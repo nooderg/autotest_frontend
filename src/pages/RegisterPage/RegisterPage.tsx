@@ -2,18 +2,14 @@ import React, { useState } from "react";
 import styles from "./RegisterPage.module.css";
 
 import {
-  Button,
   Card,
   CardContent,
   Container,
-  FormControl,
-  Input,
-  InputLabel,
 } from "@mui/material";
 
 import Api from "../../helper/api";
 import { IRegisterForm } from "../../types/formTypes";
-import Register from "../../components/Register/Register";
+import {Register} from "../../components";
 
 function isEmail(email: string): boolean {
   const regex = new RegExp(/[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/);
