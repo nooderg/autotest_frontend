@@ -35,7 +35,10 @@ function Logout() {
 function App() {
   const [jwtState, setJwtState] = useState(defaultContextApp.jwt);
   const setJwt = (jwt: string) => {
-    jwt ? localStorage.setItem('jwt', jwt) : localStorage.removeItem('jwt');
+    jwt !== ''
+      ? localStorage.setItem("jwt", jwt)
+      : localStorage.removeItem("jwt");
+      setJwtState(jwt);
   };
 
   return (
