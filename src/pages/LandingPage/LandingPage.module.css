@@ -1,2 +1,28 @@
 .LandingPage {
 }
+
+.ContainerFullscreen {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    display: flex;
+    align-items: center;
+}
+
+.GridFlex {
+    display: flex;
+    align-items: center;
+}
+
+.ImageContainer {
+    text-align: center;
+}
+
+.Image {
+    width: 300px;
+    height: auto;
+}
+
+.Link {
+    color: #1976d2;
+    text-decoration: none;
+  }

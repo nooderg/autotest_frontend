@@ -1,91 +1,144 @@
+import React from "react";
 import {
+  Box,
   Button,
   Card,
+  CardActions,
+  CardMedia,
+  Stepper,
+  Step,
+  StepLabel,
   CardContent,
   Typography,
   Grid,
   Container,
-} from '@mui/material';
-import React from 'react';
-import styles from './LandingPage.module.css';
-import web_hosting from './web_hosting.svg';
-import CardActions from '@mui/material/CardActions';
-import CardMedia from '@mui/material/CardMedia';
-import { teamList } from './teamList';
-import linkedin from '../../assets/linkedin.png';
+} from "@mui/material";
+
+import { teamList } from "./teamList";
+
+import styles from "./LandingPage.module.css";
+import web_hosting from "./web_hosting.svg";
+import analytics from "./analytics.svg";
+import linkedin from "../../assets/linkedin.png";
+import payment_completed from "./payment_completed.svg";
+import { Link } from "react-router-dom";
+
+const steps = [
+  "Accounts",
+  "Tavern file generation",
+  "CLI",
+  "Managed && automated testing instances",
+  "Statistics & API benchmark",
+];
 
 export const LandingPage = () => (
-  <div className={styles.LandingPage}>
-    <div
-      className="hero"
-      style={{
-        display: 'flex',
-        height: '90vh',
-        alignItems: 'center',
-        maxWidth: '1000px',
-        width: '90vw',
-        margin: 'auto',
-      }}
-    >
-      <div className="text" style={{ flex: 1, paddingRight: '100px' }}>
-        <h1>Open API to test</h1>
-        Lorem ipsum dolor sit amet, . Modi expedita, at non maiores quos
-        consequuntur, sint corrupti vero libero atque consequatur, quasi esse.
-        Necessitatibus debitis cupiditate maxime, temporibus in asperiores!
-        <div style={{ display: 'flex', gap: '10px', marginTop: '20px' }}>
-          <Button variant="contained">Start a free trial </Button>
-          <Button variant="outlined">View demo</Button>
-        </div>
-      </div>
-      <div className="image" style={{ flex: 1 }}>
-        <img src={web_hosting} alt="web_hosting" />
-      </div>
-    </div>
-    <div
-      style={{
-        backgroundColor: '#7986CB',
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'center',
-        padding: '50px 0px',
-      }}
-    >
-      <div
-        className="routes"
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          width: '1000px',
-          margin: 'auto',
-        }}
-      >
-        <div className="text" style={{ flex: 1 }}>
-          <h2>Test your routes easily</h2>
-          <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Beatae
-            quaerat aut rerum voluptatum nisi atque possimus odio sint
-            laudantium laboriosam tempore, iusto quia voluptatibus debitis eius
-            minima tenetur doloremque dolorem.
-          </p>
-        </div>
+  <Box className={styles.LandingPage}>
+    <Container className={styles.ContainerFullscreen}>
+      <Grid container spacing={2} className={styles.GridFlex}>
+        <Grid item xs={12} md={6}>
+          <Typography variant="h3" style={{ marginBottom: 20 }}>
+            🔎 What&apos;s autotest ?
+          </Typography>
+          <Typography variant="body1" style={{ marginBottom: 20 }}>
+            Lorem ipsum dolor sit amet, . Modi expedita, at non maiores quos
+            consequuntur, sint corrupti vero libero atque consequatur, quasi
+            esse. Necessitatibus debitis cupiditate maxime, temporibus in
+            asperiores!
+          </Typography>
+        </Grid>
+        <Grid item md={6} className={styles.ImageContainer}>
+          <img src={web_hosting} alt="web_hosting" className={styles.Image} />
+        </Grid>
+      </Grid>
+    </Container>
 
-        <div className="image" style={{ flex: 1 }}>
-          <img src={web_hosting} alt="web_hosting" />
-        </div>
-      </div>
-    </div>
-    <Container style={{ padding: 15 }}>
-      <h3>Notre équipe</h3>
+    <Container className={styles.ContainerFullscreen}>
+      <Grid container spacing={2} className={styles.GridFlex}>
+        <Grid item xs={12} md={6} className={styles.ImageContainer}>
+          <img src={analytics} alt="web_hosting" className={styles.Image} />
+        </Grid>
+
+        <Grid item md={6}>
+          <Typography variant="h3" style={{ marginBottom: 20 }}>
+            🏃‍♂️ Ok so how to use it ?
+          </Typography>
+          <Typography variant="body1" style={{ marginBottom: 20 }}>
+            First, you need to create an account. Then, simply annotate your
+            code with Swagger to generate an .openfile file, send it to us, and
+            you are done!
+          </Typography>
+          <Button variant="outlined">
+            <Link to="/app" className={styles.Link}>
+              Generate my fill
+            </Link>
+          </Button>
+        </Grid>
+      </Grid>
+    </Container>
+
+    <Container className={styles.ContainerFullscreen}>
+      <Grid container spacing={2} className={styles.GridFlex}>
+        <Grid item xs={12} md={6}>
+          <Typography variant="h3" style={{ marginBottom: 20 }}>
+            💸 And for what price?
+          </Typography>
+          <Typography variant="body1" style={{ marginBottom: 20 }}>
+            We did not decide ourselves on pricing yet. We&apos;d like to have a
+            free tier so you can try the product and decide if you want to adopt
+            us!
+          </Typography>
+        </Grid>
+        <Grid item md={6} className={styles.ImageContainer}>
+          <img
+            src={payment_completed}
+            alt="web_hosting"
+            className={styles.Image}
+          />
+        </Grid>
+      </Grid>
+    </Container>
+
+    <Container>
+      <Typography
+        variant="h3"
+        style={{ marginBottom: 20, textAlign: "center" }}
+      >
+        Roadmap
+      </Typography>
+      <Typography
+        variant="body1"
+        style={{ marginBottom: 40, textAlign: "center" }}
+      >
+        Autotest is still under development. We are still making features :
+      </Typography>
+      <Box sx={{ marginBottom: 10, width: "100%" }}>
+        <Stepper activeStep={1} alternativeLabel>
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
+      </Box>
+    </Container>
+
+    <Container>
+      <Typography
+        variant="h3"
+        style={{ marginBottom: 40, textAlign: "center" }}
+      >
+        Our Team
+      </Typography>
       <Grid
         container
         spacing={2}
-        style={{ display: 'flex', justifyContent: 'center' }}
+        style={{ display: "flex", justifyContent: "center" }}
       >
         {teamList.map((member, key) => (
           <Card
             sx={{ maxWidth: 345 }}
             key={key}
-            style={{ width: '200px', margin: '10px' }}
+            style={{ width: "200px", margin: "10px" }}
           >
             <CardMedia
               component="img"
@@ -98,28 +151,28 @@ export const LandingPage = () => (
                 gutterBottom
                 variant="h5"
                 component="div"
-                style={{ height: '40px', fontWeight: '600', fontSize: '16px' }}
+                style={{ height: "40px", fontWeight: "600", fontSize: "16px" }}
               >
                 {member.name}
               </Typography>
-              <div style={{ display: 'flex', height: '20%' }}>
+              <Box style={{ display: "flex", height: "20%" }}>
                 <Typography
                   variant="body2"
                   color="text.secondary"
-                  style={{ display: 'flex', justifyContent: 'spaceBetween' }}
+                  style={{ display: "flex", justifyContent: "spaceBetween" }}
                 >
                   {member.job}
                 </Typography>
-                <CardActions style={{ display: 'flex', justifyContent: 'end' }}>
+                <CardActions style={{ display: "flex", justifyContent: "end" }}>
                   <a href={member.linkedin}>
-                    <img src={linkedin} style={{ width: '20px' }}></img>
+                    <img src={linkedin} style={{ width: "20px" }}></img>
                   </a>
                 </CardActions>
-              </div>
+              </Box>
             </CardContent>
           </Card>
         ))}
       </Grid>
     </Container>
-  </div>
+  </Box>
 );
