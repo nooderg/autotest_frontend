@@ -4,11 +4,12 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 import { Link } from 'react-router-dom';
 import { AppContext } from '../../App';
 import { ProfilIconMenu } from '../.';
-import LogoutIcon from '@mui/icons-material/Logout';
+import logo from '../../assets/logo.png';
 
 import styles from './Appbar.module.css';
 
@@ -37,7 +38,8 @@ export const Appbar = () => {
           >
             <Box sx={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <Typography variant="h6" noWrap component="div">
-                <Link className={styles.link} to="/">
+                <Link className={styles.Link} to="/">
+                  <img  className={styles.Logo} src={logo} alt="logo" />          
                   AUTOTEST
                 </Link>
               </Typography>
@@ -45,7 +47,7 @@ export const Appbar = () => {
 
               <Box sx={{ flexGrow: 1, display: 'flex', gap: '10px' }}>
                 {pages.map((page) => (
-                  <Link className={styles.link} to={page.path} key={page.name}>
+                  <Link className={styles.Link} to={page.path} key={page.name}>
                     {page.name}
                   </Link>
                 ))}
@@ -56,14 +58,14 @@ export const Appbar = () => {
               {jwt ? (
                 <ProfilIconMenu
                   popoverContent={
-                    <Link className={styles.linkProfil} to="/logout">
+                    <Link className={styles.LinkProfil} to="/logout">
                       <LogoutIcon />
                       <Typography>Logout</Typography>
                     </Link>
                   }
                 />
               ) : (
-                <Link className={styles.link} to={'/login'}>
+                <Link className={styles.Link} to={'/login'}>
                   LOGIN
                 </Link>
               )}
