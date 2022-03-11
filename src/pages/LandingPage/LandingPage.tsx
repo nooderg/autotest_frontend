@@ -40,7 +40,7 @@ export const LandingPage = () => (
             🔎 What&apos;s autotest ?
           </Typography>
           <Typography variant="body1" style={{ marginBottom: 20 }}>
-            Automate your tests! Today it is difficult to test the implementation of your API routes, Autotest meets this need and allows you to transform your OpenAPI files into a tavern file.
+            Automate your tests! Today it is difficult to test the implementation of your API routes, Autotest meets this need and allows you to transform your OpenAPI files into a Tavern file.
           </Typography>
         </Grid>
         <Grid item md={6} className={styles.ImageContainer}>
